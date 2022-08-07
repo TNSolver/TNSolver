@@ -1,0 +1,93 @@
+
+                      Release Notes for TNSolver
+
+This is a summary of the additions, modifications and bug fixes for
+each of the TNSolver releases.
+
+======================================================================
+
+Version 0.9.3, August 19, 2018
+
+1) Extended the use of functions to source terms.  Time functions can
+   be used for the qdot or Q parameters for the qdot and Qsrc heat 
+   sources.
+
+======================================================================
+
+Version 0.9.2, August 9, 2017
+
+1) Extended the use of functions to boundary conditions.  Time 
+   functions can be used for the Tinf, q and A parameters for the
+   fixed_T and/or heat_flux type.
+
+2) Added a Solution Parameters for outputing a plot of each of the 
+   functions parsed from the input file to a PDF.  The name of the
+   PDF file will be the name of the function with a .pdf extension:
+
+   Begin Solution Parameters
+
+     plot functions = {<no>|yes}
+
+   End Solution Parameters
+
+   The user can then verify that the functions parsed from the input 
+   file are indeed what they intended.
+
+======================================================================
+
+Version 0.9.x, July 31, 2016
+
+1) Initial public release to coincide with the 2016 TFAWS conference
+   presentation.  I think most functionality is working.
+   
+2) The functions need to be extended to other parameters in the input
+   file before version 1.0 is released.
+
+3) The examples document needs to be written to illustrate the 
+   different functionalities.
+
+======================================================================
+
+Version 0.6.0, April 20, 2016
+
+1) Added the functions block to TNSolver.  In this initial release the
+   function types are limited to time as the independent variable and
+   constant, table or spline as the type.  These functions can be 
+   used in the input file in place of a (R) value for the node volume
+   or heat capacity.
+
+   Begin Functions
+
+     Begin Constant (S)
+       (R)
+     End Constant (S)
+
+     Begin Time Table (S)
+     ! time  value
+       (R)    (R)
+       ...
+       (R)    (R)
+     End Time Table (S)
+
+     Begin Time Spline (S)
+     ! time  value
+       (R)    (R)
+       ...
+       (R)    (R)
+     End Time Spline (S)
+
+   End Functions
+
+2) Added a thermostat controlled heat source.  This can be used to 
+   simulate a heater in the model by setting the heat rate and the
+   set points for heater on and off:
+
+   Begin Sources
+     ...
+!    type     Q  Ton Toff node(s)
+     tstatQ  (R) (R) (R)  (S ...)
+     ...
+   End Sources
+
+======================================================================
+
