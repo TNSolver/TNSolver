@@ -1,0 +1,47 @@
+!
+! Pipe flow with constant wall temperature, see Example 7.6 on p. 379 in [LL20]
+!
+! [LL20] J.H. Lienhard IV and J.H. Lienhard V, "A Heat Transfer Textbook," 
+!        Phlogiston Press, Cambridge, Massachusetts, fifth edition (Version 5.10),
+!        2020, http://ahtt.mit.edu
+!
+
+Begin Solution Parameters
+
+  title = [LL20] Example 7.6, pipe flow with constant wall T
+  type  = steady
+
+End Solution Parameters
+
+Begin Conductors
+  f_in advection  Tin   Tf_1  fluid  0.7  7.85398e-05  ! material, velocity, A
+  f_1  advection  Tf_1  Tf_2  fluid  0.7  7.85398e-05  ! material, velocity, A
+  f_2  advection  Tf_2  Tf_3  fluid  0.7  7.85398e-05  ! material, velocity, A
+  f_3  advection  Tf_3  Tf_4  fluid  0.7  7.85398e-05  ! material, velocity, A
+  f_4  advection  Tf_4  Tf_5  fluid  0.7  7.85398e-05  ! material, velocity, A
+  f_out  outflow Tf_5 Tf_out  fluid  0.7  7.85398e-05  ! material, velocity, A
+  h_1  convection  Tf_1  Twall   11.5  0.0015708  ! h, A
+  h_2  convection  Tf_2  Twall   11.5  0.0015708  ! h, A
+  h_3  convection  Tf_3  Twall   11.5  0.0015708  ! h, A
+  h_4  convection  Tf_4  Twall   11.5  0.0015708  ! h, A
+  h_5  convection  Tf_5  Twall   11.5  0.0015708  ! h, A
+End Conductors
+
+Begin Boundary Conditions
+
+! type      parameter(s)   node(s)
+  fixed_T      20.0         Tin       ! Inlet temperature of fluid
+  fixed_T      60.0         Twall     ! Wall temperature
+
+End Boundary Conditions
+
+Begin Material fluid
+
+! air properties for constant density flow w/ advection
+
+  density = 1.12    ! kg/m^3 @ T = (20 + 60)/2 = 40 C
+  c_p     = 1007.0  ! J/kg-K @ T = 40
+
+End Material fluid
+
+
